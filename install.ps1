@@ -1,4 +1,4 @@
-Write-Host "Salam, bu Ziya'nın PowerShell skriptidir!"
-Write-Host "İndi sistemində hansı OS olduğunu yoxlayıram..."
+Write-Host "Hacklandin"
+Write-Host "HA HA HA"
 $os = Get-CimInstance -ClassName Win32_OperatingSystem
-Write-Host "Sən $($os.Caption) sistemindəsən."
+Write-Host "$($os.Caption) - your OS system."
