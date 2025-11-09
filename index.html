@@ -68,7 +68,7 @@
 
     /* Desktop sağ menü */
     aside#nav {
-      position: fixed; right: 24px; top: 24px; bottom: 24px;
+      position: fixed; right: 24px; top: 84px; bottom: 24px;
       width: 280px; padding: 16px; border: 1px solid var(--border);
       background: linear-gradient(180deg, var(--panel), var(--panel-2));
       box-shadow: var(--shadow); border-radius: 12px; 
@@ -79,6 +79,7 @@
       .wrap { grid-template-columns: 1fr 320px; }
       aside#nav { display: block; }
       main { margin-right: 340px; }
+      #openMenu, #closeMenu { display: none; }
     }
 
     .brand {
