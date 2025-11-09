@@ -1,53 +1,53 @@
 // Typing effect
-const typeTarget = document.getElementById('type');
-const text = "> IT Help Desk | Linux & Network Enthusiast | Future DevOps Engineer";
-let i = 0;
-function type() {
-if (i <= text.length) {
-typeTarget.textContent = text.slice(0, i);
-i++;
-setTimeout(type, 30);
-}
-}
-type();
+    const typeTarget = document.getElementById('type');
+    const toType = "> Junior Technical Support Specialist | Master’s in Computer Engineering";
+    let i = 0;
+    function type(){
+      if(!typeTarget) return;
+      if(i <= toType.length){ typeTarget.textContent = toType.slice(0,i); i++; setTimeout(type, 24); }
+      else { const c = document.createElement('span'); c.className = 'cursor'; typeTarget.appendChild(c); }
+    }
+    type();
 
+    // Uptime
+    const ORIGIN = new Date('2025-06-01T00:00:00Z');
+    function formatDays(ms){ return Math.floor(ms/(1000*60*60*24)) + ' days'; }
+    function tickUptime(){
+      const val = formatDays(Date.now() - ORIGIN.getTime());
+      ['uptimeSide','uptimeMobile','uptimeFoot'].forEach(id=>{ const el = document.getElementById(id); if(el) el.textContent = val; });
+    }
+    tickUptime(); setInterval(tickUptime, 60_000);
 
-// Uptime
-const ORIGIN = new Date('2025-06-01T00:00:00Z');
-function formatDays(ms) {
-const d = Math.floor(ms / (1000 * 60 * 60 * 24));
-return d + ' days';
-}
-function updateUptime() {
-const diff = Date.now() - ORIGIN.getTime();
-const val = formatDays(diff);
-document.getElementById('uptimeSide').textContent = val;
-document.getElementById('uptimeFoot').textContent = val;
-}
-updateUptime();
-setInterval(updateUptime, 60000);
+    // Now playing (fake)
+    const songs = ['lofi beats — focus', 'terminal vibes — synth', 'midnight coding — ambient'];
+    const songEl = document.getElementById('song');
+    if(songEl) songEl.textContent = songs[Math.floor(Math.random()*songs.length)];
 
+    // Drawer
+    const drawer = document.getElementById('drawer');
+    document.getElementById('openMenu')?.addEventListener('click', ()=> drawer.classList.add('open'));
+    document.getElementById('closeMenu')?.addEventListener('click', ()=> drawer.classList.remove('open'));
+    drawer?.addEventListener('click', (e)=>{ if(e.target.tagName === 'A') drawer.classList.remove('open'); });
 
-// Theme toggle (dark/light)
-const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) document.body.classList.add(savedTheme);
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+    // THEME
+    const bodyEl = document.body;
+    const themeBtn = document.getElementById('themeToggle');
+    function applyTheme(mode){ bodyEl.setAttribute('data-theme', mode); }
+    function savedTheme(){ return localStorage.getItem('theme'); }
+    function setTheme(mode){ localStorage.setItem('theme', mode); applyTheme(mode); }
 
-function switchTheme() {
-if (document.body.classList.contains('dark')) {
-document.body.classList.replace('dark', 'light');
-localStorage.setItem('theme', 'light');
-} else {
-document.body.classList.replace('light', 'dark');
-localStorage.setItem('theme', 'dark');
-}
-}
-
-
-themeToggle.addEventListener('click', switchTheme);
-
-
-// Year footer
-const year = new Date().getFullYear();
-document.getElementById('year').textContent = year;
+    const sysLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    applyTheme(savedTheme() || (sysLight ? 'light' : 'dark'));
+    if(themeBtn){
+      themeBtn.textContent = bodyEl.getAttribute('data-theme') === 'dark' ? '🌗 Theme' : '🌞 Light';
+      themeBtn.addEventListener('click', ()=>{
+        document.body.classList.add('theme-transition');
+        setTimeout(()=> document.body.classList.remove('theme-transition'), 400);
+        const next = bodyEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        themeBtn.textContent = next === 'dark' ? '🌗 Theme' : '🌞 Light';
+      });
+    }

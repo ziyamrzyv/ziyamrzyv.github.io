@@ -7,151 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=VT323&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b0d0e;
-      --panel: #101314;
-      --panel-2: #0e1112;
-      --fg: #e6fff4;
-      --muted: #a0b8ad;
-      --accent: #00ff99;
-      --accent-dim: #00cc7a;
-      --danger: #ff5577;
-      --border: #1a1f20;
-      --shadow: 0 0 0 1px var(--border), 0 8px 24px rgba(0,0,0,.5);
-    }
-
-    /* LIGHT (modern grey + soft teal accent) */
-    [data-theme="light"] {
-      --bg: #f6f7f8;
-      --panel: #ffffff;
-      --panel-2: #f3f4f5;
-      --fg: #1c1f23;
-      --muted: #6c757d;
-      --accent: #00796b;
-      --accent-dim: #009688;
-      --border: #dfe3e6;
-      --shadow: 0 0 0 1px var(--border), 0 12px 24px rgba(0,0,0,.05);
-    }
-
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(1000px 600px at 70% -10%, rgba(0,255,153,.08), transparent 40%),
-        radial-gradient(800px 500px at 10% 120%, rgba(0,255,153,.06), transparent 40%);
-      color: var(--fg);
-      font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      line-height: 1.45;
-      transition: background .4s ease, color .4s ease, filter .4s ease;
-    }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(1000px 600px at 70% -10%, rgba(0,255,153,.08), transparent 40%),
-        radial-gradient(800px 500px at 10% 120%, rgba(0,255,153,.06), transparent 40%),
-        var(--bg);
-      color: var(--fg);
-      font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      line-height: 1.45;
-      transition: background .4s ease, color .4s ease, filter .4s ease;
-    }
-    /* Light modda neon radial yok */
-    [data-theme="light"] body { background-color: var(--bg) !important; background-image: none !important; }
-
-    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border .2s ease; }
-    a:hover { border-bottom: 1px solid var(--accent); }
-
-    /* Layout */
-    .wrap { display: grid; grid-template-columns: 1fr; min-height: 100vh; }
-
-    /* Desktop sağ menü */
-    aside#nav {
-      position: fixed; right: 24px; top: 80px; bottom: 20px;
-      width: 280px; padding: 16px; border: 1px solid var(--border);
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      box-shadow: var(--shadow); border-radius: 12px; 
-      display: none; /* >=1100px */
-      transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    @media (min-width: 1100px){
-      .wrap { grid-template-columns: 1fr 320px; }
-      aside#nav { display: block; }
-      main { margin-right: 340px; }
-      #openMenu, #closeMenu { display: none; }
-    }
-
-    .brand {
-      font-family: 'VT323', monospace; letter-spacing: 2px; font-size: 48px;
-      text-align: center; color: var(--accent);
-      text-shadow: 0 0 16px rgba(0,255,153,.25);
-      margin: 0 0 8px 0;
-    }
-    [data-theme="light"] .brand { text-shadow: none; }
-
-    .status { margin-top: 16px; padding: 12px; border: 1px dashed var(--border); border-radius: 10px; background: #0c0f10; font-size: 14px; transition: background .25s ease; }
-    [data-theme="light"] .status { background: #f4f5f6; }
-
-    .online { color: var(--accent); font-weight: 600; }
-
-    .navlinks { list-style: none; padding: 0; margin: 12px 0; }
-    .navlinks li { margin: 6px 0; }
-    .navlinks a { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; transition: background .2s ease; }
-    .navlinks a:hover { background: rgba(0,0,0,.1); }
-    [data-theme="light"] .navlinks a:hover { background: rgba(0,0,0,.05); }
-
-    /* Topbar (mobil) */
-    .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; background: rgba(11,13,14,.7); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    .topbar .logo { font-family: 'VT323', monospace; font-size: 28px; color: var(--accent); }
-    .menu-btn { border: 1px solid var(--border); background: var(--panel); color: var(--fg); padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: background .2s ease; }
-    .menu-btn:hover { background: var(--panel-2); }
-    [data-theme="light"] .topbar { background: rgba(255,255,255,.8); }
-
-    /* Drawer (mobil) */
-    .mobile-drawer { position: fixed; inset: 0 0 0 auto; width: 86%; max-width: 320px; background: var(--panel); border-left: 1px solid var(--border); transform: translateX(105%); transition: transform .25s ease; padding: 16px; z-index: 20; }
-    .mobile-drawer.open { transform: translateX(0); }
-
-    /* Sections */
-    section { margin: 24px; border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); background: linear-gradient(180deg, var(--panel), var(--panel-2)); transition: background .25s ease, border-color .25s ease, box-shadow .25s ease; }
-    .box { padding: 22px 20px; }
-    .box h2 { margin: 0 0 10px 0; font-size: 18px; color: var(--muted); font-weight: 600; }
-    .prompt { color: var(--accent); }
-
-    .hero { display: grid; gap: 16px; padding: 26px 20px 30px 20px; }
-    .hero-title { font-family: 'VT323', monospace; font-size: clamp(44px, 7.2vw, 88px); margin: 0; color: var(--accent); text-shadow: 0 0 20px rgba(0,255,153,.25); }
-    [data-theme="light"] .hero-title { text-shadow: none; }
-
-    .terminal { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; background: #0b0f0f; transition: background .25s ease; }
-    [data-theme="light"] .terminal { background: #fafafa; border-color: #e2e5e7; }
-
-    .line { white-space: pre-wrap; }
-    .cursor { display: inline-block; width: 10px; height: 1em; background: var(--accent); vertical-align: -2px; animation: blink 1s steps(1) infinite; margin-left: 2px; }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    .grid { display: grid; gap: 16px; }
-    @media (min-width: 820px){ .grid.cols-2 { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 1200px){ .grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
-
-    .pill { display: inline-block; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; background: #0c1111; margin: 4px 6px 0 0; font-size: 14px; transition: background .25s ease; }
-    [data-theme="light"] .pill { background: #eef2f4; }
-
-    .project { padding: 16px; border: 1px dashed var(--border); border-radius: 10px; background: #0c1010; transition: background .25s ease; }
-    [data-theme="light"] .project { background: #f8f9fa; }
-    .project h3 { margin: 0 0 8px 0; font-size: 16px; color: var(--fg); }
-    .project p { margin: 0 0 8px 0; color: var(--muted); font-size: 14px; }
-
-    footer { text-align: center; color: var(--muted); padding: 28px 0 40px; }
-    .mono { font-family: 'Fira Code', monospace; }
-
-    /* Scanlines */
-    .scanlines { position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,255,153,.03) 3px, rgba(0,0,0,0) 4px); opacity: .25; mix-blend-mode: screen; transition: opacity .25s ease; }
-    [data-theme="light"] .scanlines { opacity: 0; }
-
-    /* Smooth theme transition */
-    .theme-transition { filter: brightness(1.05); }
-    [data-theme="light"] .scanlines { opacity: 0; }
-  </style>
+  <link rel="stylesheet" href="Css/style.css" />
 </head>
 <body data-theme="dark">
   <div class="scanlines" aria-hidden="true"></div>
@@ -206,9 +62,9 @@
     <section id="home" aria-label="Hero">
       <div class="hero box">
         <h2 class="prompt">➜ WELCOME</h2>
-        <h1 class="hero-title">Hello, I'm Ziya</h1>
+        <h1 class="hero-title">Hello, I'm Ziya Mirzayev</h1>
         <div class="terminal" aria-live="polite">
-          <div class="line">&gt; ziya@home:~$ whoami</div>
+          <div class="line">&gt; ziyamrzyv@home:~$ whoami</div>
           <div class="line" id="type"></div>
         </div>
         <div class="status" style="display:flex;gap:14px;flex-wrap:wrap">
@@ -334,60 +190,6 @@ solutions.</p>
     </footer>
   </main>
 
-  <script>
-    // Typing effect
-    const typeTarget = document.getElementById('type');
-    const toType = "> IT Help Desk | Linux & Network Enthusiast | Future DevOps Engineer";
-    let i = 0;
-    function type(){
-      if(!typeTarget) return;
-      if(i <= toType.length){ typeTarget.textContent = toType.slice(0,i); i++; setTimeout(type, 24); }
-      else { const c = document.createElement('span'); c.className = 'cursor'; typeTarget.appendChild(c); }
-    }
-    type();
-
-    // Uptime
-    const ORIGIN = new Date('2025-06-01T00:00:00Z');
-    function formatDays(ms){ return Math.floor(ms/(1000*60*60*24)) + ' days'; }
-    function tickUptime(){
-      const val = formatDays(Date.now() - ORIGIN.getTime());
-      ['uptimeSide','uptimeMobile','uptimeFoot'].forEach(id=>{ const el = document.getElementById(id); if(el) el.textContent = val; });
-    }
-    tickUptime(); setInterval(tickUptime, 60_000);
-
-    // Now playing (fake)
-    const songs = ['lofi beats — focus', 'terminal vibes — synth', 'midnight coding — ambient'];
-    const songEl = document.getElementById('song');
-    if(songEl) songEl.textContent = songs[Math.floor(Math.random()*songs.length)];
-
-    // Drawer
-    const drawer = document.getElementById('drawer');
-    document.getElementById('openMenu')?.addEventListener('click', ()=> drawer.classList.add('open'));
-    document.getElementById('closeMenu')?.addEventListener('click', ()=> drawer.classList.remove('open'));
-    drawer?.addEventListener('click', (e)=>{ if(e.target.tagName === 'A') drawer.classList.remove('open'); });
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // THEME
-    const bodyEl = document.body;
-    const themeBtn = document.getElementById('themeToggle');
-    function applyTheme(mode){ bodyEl.setAttribute('data-theme', mode); }
-    function savedTheme(){ return localStorage.getItem('theme'); }
-    function setTheme(mode){ localStorage.setItem('theme', mode); applyTheme(mode); }
-
-    const sysLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-    applyTheme(savedTheme() || (sysLight ? 'light' : 'dark'));
-    if(themeBtn){
-      themeBtn.textContent = bodyEl.getAttribute('data-theme') === 'dark' ? '🌗 Theme' : '🌞 Light';
-      themeBtn.addEventListener('click', ()=>{
-        document.body.classList.add('theme-transition');
-        setTimeout(()=> document.body.classList.remove('theme-transition'), 400);
-        const next = bodyEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        setTheme(next);
-        themeBtn.textContent = next === 'dark' ? '🌗 Theme' : '🌞 Light';
-      });
-    }
-  </script>
+  <script src="Js/main.js"></script>
 </body>
 </html>
