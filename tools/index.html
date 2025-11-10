@@ -1,123 +1,147 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>get.activated.win — Installer</title>
+<title>🛠 Tools — ZIYA.DEV</title>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0b0d0e; --panel:#0e1112; --fg:#dfffe8; --muted:#9fb8a6; --accent:#00ff99;
-  }
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#071008 0%,var(--bg) 60%);color:var(--fg);font-family:'Fira Code',monospace;}
-  .wrap{max-width:980px;margin:40px auto;padding:20px;}
-  .card{background:linear-gradient(180deg,var(--panel),#0b0d0f);border:1px solid rgba(255,255,255,.03);border-radius:10px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.6);}
-  h1{margin:0 0 8px 0;color:var(--accent);font-size:28px}
-  p{color:var(--muted);margin:8px 0 14px 0}
-  pre.code {background:#071010;padding:12px;border-radius:8px;overflow:auto;border:1px dashed rgba(255,255,255,.03);}
-  .btn{display:inline-block;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:transparent;color:var(--fg);cursor:pointer;margin-right:8px}
+  :root{ --bg:#0b0d0e; --panel:#0e1112; --fg:#e6fff4; --muted:#9fb8a6; --accent:#00ff99; --border:#1a1f20; }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#071008 0%,var(--bg) 60%);color:var(--fg);font-family:'Fira Code',monospace;line-height:1.45}
+  .wrap{max-width:980px;margin:36px auto;padding:18px}
+  h1{margin:0 0 10px 0;color:var(--accent);font-size:28px}
+  p{color:var(--muted);margin:6px 0 16px 0}
+  .grid{display:grid;gap:16px}
+  @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
+
+  .card{background:linear-gradient(180deg,var(--panel),#0b0d0f);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+  .section-title{color:var(--accent);font-weight:600;margin:4px 0 10px 0}
+  .btn{display:inline-block;padding:9px 12px;border-radius:10px;border:1px solid #24302c;background:#0d1212;color:var(--fg);cursor:pointer}
   .btn:hover{filter:brightness(1.08)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+  pre.terminal{background:#0c0f0f;border:1px dashed var(--border);border-radius:10px;padding:12px;min-height:140px;overflow:auto}
+  .prompt{color:var(--accent)}
+  .ok{color:#7ef4a2}
+  .warn{color:#ffcd75}
+  .err{color:#ff7a7a}
   .muted{color:var(--muted);font-size:13px}
-  .status{margin-top:12px;padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.02)}
-  .small{font-size:13px;color:var(--muted)}
-  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
-  .hash-ok{color:#7ef4a2}
-  .hash-bad{color:#ff7a7a}
-  @media(max-width:620px){ .wrap{margin:16px;padding:12px} h1{font-size:22px}}
 </style>
 </head>
 <body>
-  <div class="wrap card" role="main">
-    <h1>ziya.is-a.dev — Installer hub</h1>
-    <p class="small">This page provides the single-line PowerShell installer and integrity checks. The actual script file is served as plain text at <code id="rawUrl">https://ziya.is-a.dev/tools/ziya.ps1</code>.</p>
+  <div class="wrap">
+    <h1>🛠 Tools — ZIYA.DEV</h1>
+    <p class="muted">Aşağıdaki alan <strong>sayfa içinde</strong> çalışan basit araçları gösterir (IP vb.). Sağ tarafta ise PowerShell için <strong>tek tıklama kopyala</strong> butonları vardır.</p>
 
-    <section style="margin-top:12px">
-      <div style="font-weight:600;color:var(--accent)">Quick one-liner</div>
-      <pre class="code" id="oneLiner">irm 'https://ziya.is-a.dev/tools/tool.ps1' | iex</pre>
-      <div style="margin-top:8px">
-        <button class="btn" id="copyBtn">Copy one-liner</button>
-        <a class="btn" id="openRaw" href="https://ziya.is-a.dev/tools/tool.ps1" target="_blank" rel="noopener">Open raw .ps1</a>
-        <button class="btn" id="downloadBtn">Download .ps1</button>
+    <div class="grid">
+      <!-- SOL: Sayfa içi çalışan mini terminal -->
+      <div class="card">
+        <div class="section-title">Mini Terminal (tarayıcı içinde çalışır)</div>
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn" onclick="showIP()">1️⃣ IP’mi göster</button>
+          <button class="btn" onclick="activationDemo()">2️⃣ Aktivasyon test (demo)</button>
+          <button class="btn" onclick="love()">8️⃣ Love Message</button>
+          <button class="btn" onclick="clearTerm()">🧹 Temizle</button>
+        </div>
+        <pre id="term" class="terminal"><span class="prompt">~#</span> hoş geldin</pre>
+        <p class="muted" style="margin-top:8px">Not: Tarayıcı, sistem komutları çalıştıramaz; burada sadece web API’leri ve sayfa içi çıktılar gösterilir.</p>
       </div>
-      <p class="muted" style="margin-top:8px">Tip: safer workflow — <strong>download</strong> the script, inspect it, then run it locally (see instructions below).</p>
-    </section>
 
-    <section style="margin-top:16px">
-      <div style="font-weight:600;color:var(--accent)">Integrity (SHA-256)</div>
-      <p class="small">We publish a known-good SHA-256 for the script. Click <em>Verify</em> to fetch the script and compute its hash in your browser.</p>
-      <div style="display:flex;gap:8px;align-items:center">
-        <input id="expectedHash" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:transparent;color:var(--fg)" placeholder="Enter expected SHA-256 (hex)" />
-        <button class="btn" id="verifyBtn">Verify</button>
+      <!-- SAĞ: PowerShell hızlı aksiyonları -->
+      <div class="card">
+        <div class="section-title">PowerShell hızlı aksiyonlar (kopyala)</div>
+        <p class="muted" style="margin-top:-4px">Butona tıklayın → ilgili komut panoya kopyalansın → PowerShell’e yapıştırın ve Enter’a basın.</p>
+
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn" onclick="copyCmd(1)">1) IP Info</button>
+          <button class="btn" onclick="copyCmd(2)">2) Activation (demo)</button>
+          <button class="btn" onclick="copyCmd(3)">3) Ping 8.8.8.8</button>
+          <button class="btn" onclick="copyCmd(8)">8) Love Message</button>
+          <button class="btn" onclick="copyCmd(9)">9) Open tools/</button>
+        </div>
+
+        <div class="section-title" style="margin-top:6px">Tek satır (irm | iex)</div>
+        <pre id="oneLiner" class="terminal">irm 'https://ziya.is-a.dev/tools/ziya.ps1' | iex</pre>
+        <div class="row" style="margin-top:8px">
+          <button class="btn" onclick="copyOne()">Tek satırı kopyala</button>
+          <a class="btn" id="openRaw" href="https://ziya.is-a.dev/tools/ziya.ps1" target="_blank" rel="noopener">Raw .ps1 aç</a>
+          <button class="btn" onclick="downloadCmdFile()">Ping .cmd indir</button>
+        </div>
+        <p class="muted" style="margin-top:8px">Daha güvenli akış: önce <strong>indir</strong> → <strong>incele</strong> → sonra çalıştır.</p>
       </div>
-      <div class="status" id="verifyStatus" aria-live="polite">No verification performed yet.</div>
-    </section>
-
-    <section style="margin-top:16px">
-      <div style="font-weight:600;color:var(--accent)">Safer usage (recommended)</div>
-      <ol class="small" style="margin:8px 0 0 18px">
-        <li>Click <strong>Open raw</strong> and save the script to your machine.</li>
-        <li>Open the file in an editor and review the content.</li>
-        <li>Run locally: <code>powershell -ExecutionPolicy Bypass -File .\ziya.ps1</code> or use <code>pwsh -File .\ziya.ps1</code>.</li>
-      </ol>
-    </section>
-
-    <section style="margin-top:16px">
-      <div style="font-weight:600;color:var(--accent)">Troubleshooting & help</div>
-      <p class="small">If the script doesn't start: check PowerShell version, execution policy, and antivirus. See your project page for help.</p>
-    </section>
-
-    <footer>
-      <div class="small">Hosted at <strong>ziya.is-a.dev</strong> — place your plain .ps1 file at <code>/tools/ziya.ps1</code></div>
-    </footer>
+    </div>
   </div>
 
 <script>
-/* Utility: copy one-liner */
-document.getElementById('copyBtn').addEventListener('click', async ()=>{
-  const t = document.getElementById('oneLiner').textContent.trim();
-  try { await navigator.clipboard.writeText(t); alert('Copied: ' + t); }
-  catch(e){ prompt('Copy this line:', t); }
-});
+/* === Ayarlar === */
+const PS_URL = 'https://ziya.is-a.dev/tools/ziya.ps1';
 
-/* Download raw ps1 */
-document.getElementById('downloadBtn').addEventListener('click', async ()=>{
-  const url = document.getElementById('rawUrl').textContent.trim();
-  window.open(url, '_blank');
-});
+/* === Mini Terminal Helpers === */
+const term = document.getElementById('term');
+function out(msg, cls=''){ term.innerHTML += `\n<span class="${cls}">${msg}</span>`; term.scrollTop = term.scrollHeight; }
+function line(cmd){ term.innerHTML += `\n<span class="prompt">~#</span> ${cmd}`; term.scrollTop = term.scrollHeight; }
+function clearTerm(){ term.textContent = "~# temizlendi"; }
 
-/* Hash verification using SubtleCrypto */
-async function sha256hex(str){
-  const enc = new TextEncoder();
-  const data = enc.encode(str);
-  const hash = await crypto.subtle.digest('SHA-256', data);
-  const a = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
-  return a;
+/* 1) IP göster (tarayıcı içi) */
+async function showIP(){
+  line('ip göster');
+  try{
+    const r = await fetch('https://api.ipify.org?format=json',{cache:'no-store'});
+    const j = await r.json();
+    out('Public IP: ' + j.ip, 'ok');
+  }catch(e){
+    out('IP alınamadı: ' + e.message, 'err');
+  }
 }
 
-document.getElementById('verifyBtn').addEventListener('click', async ()=>{
-  const rawUrl = document.getElementById('rawUrl').textContent.trim();
-  const expected = document.getElementById('expectedHash').value.trim().toUpperCase();
-  const status = document.getElementById('verifyStatus');
-  status.textContent = 'Fetching script...';
-  try {
-    const r = await fetch(rawUrl, {cache:'no-store'});
-    if (!r.ok) throw new Error('Network response not OK: ' + r.status);
-    const txt = await r.text();
-    status.textContent = 'Computing SHA-256...';
-    const got = await sha256hex(txt);
-    if (!expected) {
-      status.innerHTML = 'Computed SHA-256: <code style="color:var(--muted)">'+got+'</code> — provide expected hash above to compare.';
-      return;
-    }
-    if (got === expected) {
-      status.innerHTML = '<span class="hash-ok">✔ Hash matches: '+got+'</span>';
-    } else {
-      status.innerHTML = '<span class="hash-bad">✖ Hash mismatch!</span><div style="margin-top:8px"><strong>Computed:</strong> '+got+'</div><div style="margin-top:6px;color:var(--muted)"><strong>Expected:</strong> '+expected+'</div>';
-    }
-  } catch(err){
-    status.innerHTML = '<span class="hash-bad">Fetch failed: '+err.message+'</span>';
+/* 2) Aktivasyon demo (tarayıcı içi) */
+function activationDemo(){
+  line('aktivasyon test');
+  out('başlatılıyor...', 'warn');
+  setTimeout(()=> out('✅ Aktivasyon OK (demo)', 'ok'), 800);
+}
+
+/* 8) Love Message (tarayıcı içi) */
+function love(){
+  line('love');
+  out('Seni seviyorum balım 💜', 'ok');
+}
+
+/* === PowerShell Komutları (kopyala) === */
+function ps(fn){
+  // irm ile scripti belleğe al, fonksiyonu çağır
+  switch(fn){
+    case 1: return `irm '${PS_URL}' | iex; Show-PublicIP`;
+    case 2: return `irm '${PS_URL}' | iex; Run-ActivationTest`;
+    case 3: return `irm '${PS_URL}' | iex; Ping-Test -Host 8.8.8.8 -Count 4`;
+    case 8: return `irm '${PS_URL}' | iex; Write-Host '\`nSeni seviyorum balım 💜' -ForegroundColor Magenta`;
+    case 9: return `irm '${PS_URL}' | iex; Start-Process 'https://ziya.is-a.dev/tools/'`;
+    default: return `irm '${PS_URL}' | iex`;
   }
-});
+}
+
+async function copy(text){
+  try{ await navigator.clipboard.writeText(text); alert('Kopyalandı:\n\n' + text); }
+  catch(e){ prompt('Bu satırı kopyala:', text); }
+}
+
+function copyCmd(n){ copy(ps(n)); }
+function copyOne(){ copy(`irm '${PS_URL}' | iex`); }
+
+/* .cmd dosyası indir (örnek: Ping) */
+function downloadCmdFile(){
+  const line = `powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "irm '${PS_URL}' | iex; Ping-Test -Host 8.8.8.8 -Count 4"`;
+  const blob = new Blob([line + "\r\npause\r\n"], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ziya-ping.cmd';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+/* linkleri ayarla */
+document.getElementById('oneLiner').textContent = `irm '${PS_URL}' | iex`;
+document.getElementById('openRaw').href = PS_URL;
 </script>
 </body>
 </html>

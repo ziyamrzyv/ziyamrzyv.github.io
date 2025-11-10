@@ -101,7 +101,7 @@ function Show-MenuAndRun {
         Pause
       }
       '8' {
-        Write-Host "`nSeni seviyorum balım 💜" -ForegroundColor Magenta
+        Write-Host "`nSeni seviyorum balim 💜" -ForegroundColor Magenta
         Pause
       }
 
