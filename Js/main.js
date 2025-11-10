@@ -18,11 +18,6 @@
     }
     tickUptime(); setInterval(tickUptime, 60_000);
 
-    // Now playing (fake)
-    const songs = ['lofi beats — focus', 'terminal vibes — synth', 'midnight coding — ambient'];
-    const songEl = document.getElementById('song');
-    if(songEl) songEl.textContent = songs[Math.floor(Math.random()*songs.length)];
-
     // Drawer
     const drawer = document.getElementById('drawer');
     document.getElementById('openMenu')?.addEventListener('click', ()=> drawer.classList.add('open'));
