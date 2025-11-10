@@ -85,6 +85,7 @@ function Show-MenuAndRun {
     Write-Host "1) Show public IP & local interfaces"
     Write-Host "2) Activation test (demo)"
     Write-Host "3) Ping test (to host)"
+    Write-Host "8) Message "
     Write-Host "9) Open scripts folder URL in browser"
     Write-Host "0) Exit"
     Write-Host "--------------------------------------------"
@@ -118,6 +119,14 @@ try {
         $h = Read-Host "Hostname or IP (default 8.8.8.8)"
         if (-not $h) { $h = '8.8.8.8' }
         Ping-Test -Host $h -Count 4
+      }
+      8 {
+        Write-Host "`nSeni seviyorum balım 💜" -ForegroundColor Magenta
+        Pause
+      }
+      9 {
+        $u = 'https://ziya.is-a.dev/tools/'   # <- kendi domainin burada
+        Start-Process $u
       }
       default { Write-Warn "Unknown cmd: $cmd" }
     }
