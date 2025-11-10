@@ -100,6 +100,11 @@ function Show-MenuAndRun {
         Ping-Test -Host $h -Count 4
         Pause
       }
+      '8' {
+        Write-Host "`nSeni seviyorum balım 💜" -ForegroundColor Magenta
+        Pause
+      }
+
       '9' {
         $u = 'https://ziya.is-a.dev/tools/'   # <- kendi domainin burada
         Start-Process $u
