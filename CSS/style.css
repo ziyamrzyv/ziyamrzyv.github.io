@@ -20,7 +20,7 @@
       --muted: #6c757d;
       --accent: #00796b;
       --accent-dim: #009688;
-      --border: #dfe3e6;
+      --border: #a7a7a7;
       --shadow: 0 0 0 1px var(--border), 0 12px 24px rgba(0,0,0,.05);
     }
 
