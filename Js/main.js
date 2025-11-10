@@ -10,7 +10,7 @@
     type();
 
     // Uptime
-    const ORIGIN = new Date('2025-06-01T00:00:00Z');
+    const ORIGIN = new Date('2025-11-09T00:00:00Z');
     function formatDays(ms){ return Math.floor(ms/(1000*60*60*24)) + ' days'; }
     function tickUptime(){
       const val = formatDays(Date.now() - ORIGIN.getTime());
