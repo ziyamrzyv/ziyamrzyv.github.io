@@ -67,7 +67,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center text-center">
-      <h1 className="text-5xl font-bold text-[#00ff99]">Tailwind Çalisiyor 🎉</h1>
+      <h1 className="text-5xl font-bold text-[#00ff99]">Tailwind Çalışıyor 🎉</h1>
       <p className="text-white/70 mt-4">Merhaba Ziya</p>
     </main>
   );
