@@ -1,21 +1,8 @@
+/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Basit tema */
-:root {
-  --bg: #0b0d0e;
-  --fg: #e6fff4;
-  --accent: #00ff99;
-}
-html, body {
-  height: 100%;
-}
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-a {
-  color: var(--accent);
-}
+/* İsteğe bağlı ufak iyileştirmeler */
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; }

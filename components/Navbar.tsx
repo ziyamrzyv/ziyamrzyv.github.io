@@ -1,57 +1,55 @@
 // components/Navbar.tsx
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
+import Link from "next/link";
+import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-neutral-800 bg-neutral-950/80 backdrop-blur">
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <Link href="/" className="font-semibold text-neutral-100">
-          ziyamrzyv
-        </Link>
+    <>
+      {/* Topbar */}
+      <div className="sticky top-0 z-40 w-full border-b border-zinc-800/60 bg-white/60 dark:bg-zinc-900/60 backdrop-blur supports-[backdrop-filter]:bg-white/60 supports-[backdrop-filter]:dark:bg-zinc-900/60">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+          <Link href="/" className="font-mono text-lg text-emerald-400">ziyamrzyv</Link>
 
-        <div className="flex items-center gap-2">
-          {/* Tema butonu */}
-          <ThemeToggle />
-
-          {/* Mobil menü butonu */}
-          <button
-            onClick={() => setOpen(true)}
-            className="lg:hidden px-3 py-2 rounded-md border border-neutral-700 text-neutral-100"
-            aria-label="Open menu"
-          >
-            ≡ Menu
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setOpen(true)}
+              className="lg:hidden px-3 py-2 rounded-md border border-zinc-700 bg-zinc-900 text-zinc-100"
+              aria-label="Open menu"
+            >
+              ≡ Menu
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobil drawer (örnek) */}
-      {open && (
-        <div className="fixed inset-0 z-50 bg-black/60 lg:hidden" onClick={() => setOpen(false)}>
-          <aside
-            className="absolute right-0 top-0 h-full w-72 bg-neutral-900 border-l border-neutral-800 p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setOpen(false)}
-              className="mb-4 px-3 py-2 rounded-md border border-neutral-700 text-neutral-100"
-            >
-              ✕ Kapat
-            </button>
-            <ul className="space-y-2">
-              <li><Link href="/#home" onClick={() => setOpen(false)}>Home</Link></li>
-              <li><Link href="/#about" onClick={() => setOpen(false)}>About</Link></li>
-              <li><Link href="/#projects" onClick={() => setOpen(false)}>Projects</Link></li>
-              <li><Link href="/tools" onClick={() => setOpen(false)}>Tools</Link></li>
-            </ul>
-          </aside>
+      {/* Mobile drawer */}
+      <div
+        className={`fixed inset-0 z-50 bg-black/50 transition ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setOpen(false)}
+      />
+      <nav
+        className={`fixed right-0 top-0 z-50 h-full w-80 transform border-l border-zinc-800 bg-zinc-900 p-4 transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
+        aria-label="Mobile Menu"
+      >
+        <div className="flex items-center justify-between">
+          <h3 className="font-mono text-2xl text-emerald-400">Menu</h3>
+          <button onClick={() => setOpen(false)} className="px-3 py-2 rounded-md border border-zinc-700">✕</button>
         </div>
-      )}
-    </nav>
+        <ul className="mt-4 space-y-2">
+          <li><Link href="/" onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Home</Link></li>
+          <li><Link href="/#about" onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ About</Link></li>
+          <li><Link href="/#skills" onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Skills</Link></li>
+          <li><Link href="/#projects" onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Projects</Link></li>
+          <li><Link href="/tools" onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Tools</Link></li>
+          <li><Link href="/#contact" onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Contact</Link></li>
+        </ul>
+      </nav>
+    </>
   );
 }

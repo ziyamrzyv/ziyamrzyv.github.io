@@ -1,40 +1,46 @@
-'use client'
-import { useEffect, useState } from "react";
+// components/Footer.tsx
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 
 export default function Footer() {
-    const [uptimeDays, setUptimeDays] = useState(0);
-    const ORIGIN_ISO = '2025-11-10T00:00:00Z';
+  const [uptimeDays, setUptimeDays] = useState(0);
+  const ORIGIN_ISO = "2025-11-10T00:00:00Z";
+  const intervalRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
-    useEffect(() => {
-        const ORIGIN = new Date(ORIGIN_ISO);
-        const DAY_MS = 1000 * 60 * 60 * 24;
+  useEffect(() => {
+    const ORIGIN = new Date(ORIGIN_ISO);
+    const DAY_MS = 24 * 60 * 60 * 1000;
 
-        const calculateUptime = () => {
-            const now = new Date();
-            const diff = Math.floor((now.getTime() - ORIGIN.getTime()) / DAY_MS);
-            setUptimeDays(diff)
-        }
+    const compute = () => {
+      const now = new Date();
+      setUptimeDays(Math.floor((now.getTime() - ORIGIN.getTime()) / DAY_MS));
+    };
 
-        calculateUptime();
+    compute();
 
-        const now = new Date();
-        const tomorrow = new Date(now);
-        tomorrow.setUTCHours(24, 0, 0, 0);
-        const msUntilTomorrow = tomorrow.getTime() - now.getTime();
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setUTCHours(24, 0, 0, 0);
+    const msUntilNextDay = tomorrow.getTime() - now.getTime();
 
-        const timeout= setTimeout(() => {
-            calculateUptime();
-            setInterval(calculateUptime, DAY_MS);
-        }, msUntilTomorrow);
+    timeoutRef.current = window.setTimeout(() => {
+      compute();
+      intervalRef.current = window.setInterval(compute, DAY_MS);
+    }, msUntilNextDay);
 
-        return () => clearTimeout(timeout);
-    }, [ORIGIN_ISO]);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [ORIGIN_ISO]);
 
   return (
-    <footer className="text-center text-gray-400 py-6 mb-4">
+    <footer className="text-center text-zinc-400 py-6">
       <p>
-        I&apos;m <span className="text-green-400 font-semibold">ONLINE_</span> ·
-        Uptime: {uptimeDays} day{uptimeDays !== 1 && "s"}
+        I&apos;m <span className="text-emerald-400 font-semibold">ONLINE_</span> ·
+        {" "}Uptime: {uptimeDays} day{uptimeDays !== 1 && "s"}
       </p>
       <p className="mt-2 text-sm">© Ziya Mirzayev {new Date().getFullYear()}</p>
     </footer>
