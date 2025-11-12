@@ -3,7 +3,7 @@ import Link from "next/link";
 // components/Sidebar.tsx
 export default function Sidebar() {
   return (
-    <aside className="fixed right-6 top-20 bottom-5 w-[280px] p-4 shadow hidden xl:block border-panel transition-colors duration-200 ease-in-out">
+    <aside className="fixed right-6 top-24 bottom-8 p-4 w-80 shadow hidden lg:block border-panel transition-colors duration-200 ease-in-out">
       <h3 className="font-mono text-3xl text-emerald-400 text-center">Menu</h3>
       <ul className="mt-3 space-y-1">
         <li><Link href="/#home" className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Home</Link></li>

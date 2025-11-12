@@ -21,10 +21,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
         <Providers>
           <Navbar />
-          <div className="mx-auto w-full max-w-6xl flex-1 flex gap-6 px-4 py-6">
-            <main className="flex-1">{children}</main>
+          <div className="mx-auto w-full flex-1 flex gap-6 px-8 py-7">
+            <main className="flex-1 w-full">{children}</main>
             {/* Desktop aside */}
-            <aside className="hidden lg:block w-72 shrink-0">
+            <aside className="hidden lg:block w-80 shrink-0">
               <Sidebar />
             </aside>
           </div>
