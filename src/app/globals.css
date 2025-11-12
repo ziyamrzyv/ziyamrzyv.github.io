@@ -4,5 +4,19 @@
 @tailwind utilities;
 
 /* İsteğe bağlı ufak iyileştirmeler */
-:root { color-scheme: dark; }
+:root { 
+    color-scheme: dark;
+    --border: #b1b1b1;
+    --panel: #ffffff0a;
+    --panel-2: #e0e0e0;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark {
+  --border: #27272a;
+  --panel: #0b0d0e;
+  --panel-2: #101314;
+  --shadow: 0 0 12px rgba(0, 255, 153, 0.1);
+}
+
 html { scroll-behavior: smooth; }

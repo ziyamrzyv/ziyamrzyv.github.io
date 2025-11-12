@@ -22,11 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Navbar />
           <div className="mx-auto w-full max-w-6xl flex-1 flex gap-6 px-4 py-6">
+            <main className="flex-1">{children}</main>
             {/* Desktop aside */}
             <aside className="hidden lg:block w-72 shrink-0">
               <Sidebar />
             </aside>
-            <main className="flex-1">{children}</main>
           </div>
           <Footer />
         </Providers>

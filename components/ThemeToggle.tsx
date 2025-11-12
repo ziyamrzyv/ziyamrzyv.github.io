@@ -8,7 +8,13 @@ export default function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  
+
   if (!mounted) return (
     <button className="px-3 py-2 rounded-md border border-zinc-700">…</button>
   );
