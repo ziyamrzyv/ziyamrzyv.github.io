@@ -14,7 +14,7 @@ export default function Sidebar() {
         <li><Link href="/#contact" className="block rounded-md px-3 py-2 hover:bg-zinc-800">☆ Contact</Link></li>
       </ul>
 
-      <div className="mt-4 border-dashed-panel p-3 text-sm">
+      <div className="mt-4 border-dashed-panel p-3 text-sm text-zinc-300">
         <div><span className="text-emerald-400 font-semibold">I&apos;m ONLINE_</span></div>
         <div>System uptime is shown below</div>
       </div>

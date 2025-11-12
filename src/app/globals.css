@@ -7,8 +7,8 @@
 :root { 
     color-scheme: dark;
     --border: #b1b1b1;
-    --panel: #ffffff0a;
-    --panel-2: #e0e0e0;
+    --panel: #dddddd1f;
+    --panel-2: #101314;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -20,3 +20,6 @@
 }
 
 html { scroll-behavior: smooth; }
+
+@keyframes blink { 50% { opacity: 0; } }
+.cursor.blink { display:inline-block; animation: blink 1s step-start infinite; color:#22c55e; }
