@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <>
       {/* Topbar */}
-      <div className="sticky top-0 z-40 w-full border-b border-zinc-800/60 bg-white/60 dark:bg-zinc-900/60 backdrop-blur supports-[backdrop-filter]:bg-white/60 supports-[backdrop-filter]:dark:bg-zinc-900/60">
+      <div className="sticky top-5 mx-10 my-3 border-panel backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <Link href="/" className="font-mono text-lg text-emerald-400">ziyamrzyv</Link>
 

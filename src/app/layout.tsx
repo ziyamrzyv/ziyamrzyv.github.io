@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-[--background]`}>
         <Providers>
           <Navbar />
-          <div className="mx-auto w-full flex-1 flex gap-6 px-8 py-7">
+          <div className="mx-auto w-full flex-1 flex gap-6 px-10 py-7">
             <main className="flex-1 w-full">{children}</main>
             {/* Desktop aside */}
             <aside className="hidden lg:block w-80 shrink-0">

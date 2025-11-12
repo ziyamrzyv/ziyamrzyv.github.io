@@ -7,9 +7,10 @@
 :root { 
     color-scheme: dark;
     --border: #b1b1b1;
-    --panel: #dddddd1f;
+    --panel: #7c7c7c;
     --panel-2: #101314;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --background: #cccccc;
 }
 
 .dark {
@@ -17,6 +18,7 @@
   --panel: #0b0d0e;
   --panel-2: #101314;
   --shadow: 0 0 12px rgba(0, 255, 153, 0.1);
+  --background: #0a0a0a;
 }
 
 html { scroll-behavior: smooth; }
