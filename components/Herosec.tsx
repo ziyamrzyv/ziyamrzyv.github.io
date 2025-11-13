@@ -28,12 +28,12 @@ export default function Herosec() {
 
   return (
     <section className="border-panel p-6 md:p-8">
-      <h2 className="text-sm md:text-base text-emerald-300/80 font-semibold tracking-wider flex items-center gap-2">
-        <span className="text-emerald-400">➜</span> WELCOME
+      <h2 className="text-sm md:text-base text-[--green1] text-300/80 font-semibold tracking-wider flex items-center gap-2">
+        <span className="text-[--green1] text-400">➜</span> WELCOME
       </h2>
 
       <h1
-        className="mt-3 text-3xl md:text-4xl lg:text-5xl leading-none font-bold text-emerald-400 tracking-wider"
+        className="mt-3 text-3xl md:text-4xl lg:text-5xl leading-none font-bold text-[--green1] text-400 tracking-wider"
         style={{ textShadow: "0 0 20px rgba(16,185,129,.35)" }}
       >
         Hello, I&apos;m Ziya Mirzayev

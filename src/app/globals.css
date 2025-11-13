@@ -11,6 +11,7 @@
     --panel-2: #101314;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     --background: #cccccc;
+    --green1: #d89e00;
 }
 
 .dark {
@@ -19,6 +20,7 @@
   --panel-2: #101314;
   --shadow: 0 0 12px rgba(0, 255, 153, 0.1);
   --background: #0a0a0a;
+  --green1: #50C878;
 }
 
 html { scroll-behavior: smooth; }

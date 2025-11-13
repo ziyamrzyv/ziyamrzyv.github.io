@@ -12,18 +12,18 @@ export default function Navbar() {
     <>
       {/* Topbar */}
       <div className="sticky top-5 mx-10 my-3 border-panel backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+        <div className="mx-10  py-3 flex items-center justify-between">
           <Link href="/" className="font-mono text-lg text-emerald-400">ziyamrzyv</Link>
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <button
+            {/* <button
               onClick={() => setOpen(true)}
               className="lg:hidden px-3 py-2 rounded-md border border-zinc-700 bg-zinc-900 text-zinc-100"
               aria-label="Open menu"
             >
               ≡ Menu
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default function Navbar() {
         onClick={() => setOpen(false)}
       />
       <nav
-        className={`fixed right-0 top-0 z-50 h-full w-80 transform border-l border-zinc-800 bg-zinc-900 p-4 transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed right-0 top-0 z-50 h-full w-80 border-panel rounded-none p-4 transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
         aria-label="Mobile Menu"
       >
         <div className="flex items-center justify-between">
