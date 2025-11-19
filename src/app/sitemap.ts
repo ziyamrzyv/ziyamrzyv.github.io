@@ -1,7 +1,7 @@
 export default function sitemap() {
   return [
     {
-      url: "https://ziyarmrzyv.me/",
+      url: "https://wwww.ziyarmrzyv.me/",
       lastModified: new Date(),
     },
   ];
