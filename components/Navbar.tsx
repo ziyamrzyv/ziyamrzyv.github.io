@@ -16,7 +16,7 @@ export default function Navbar() {
           <Link href="/" className="font-mono text-lg text-emerald-400">ziyamrzyv</Link>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             {/* <button
               onClick={() => setOpen(true)}
               className="lg:hidden px-3 py-2 rounded-md border border-zinc-700 bg-zinc-900 text-zinc-100"
