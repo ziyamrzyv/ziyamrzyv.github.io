@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.ziyarmrzyv.me/sitemap.xml",
+    sitemap: "https://ziyarmrzyv.me/sitemap.xml",
   };
 }
 
