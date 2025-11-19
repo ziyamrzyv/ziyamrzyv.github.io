@@ -1,8 +1,12 @@
-export default function sitemap() {
+import { MetadataRoute } from "next";
+
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://wwww.ziyarmrzyv.me/",
+      url: "https://www.ziyarmrzyv.me/",
       lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0,
     },
   ];
 }
